@@ -49,6 +49,7 @@ func Init(token string, hc *http.Client) error {
 	return nil
 }
 
+// Artist in genius
 type Artist struct {
 	Id   int
 	Name string
@@ -58,6 +59,7 @@ func (a Artist) String() string {
 	return fmt.Sprintf("Artist(%d): %s", a.Id, a.Name)
 }
 
+// Song in genius
 type Song struct {
 	Id    int
 	Title string
@@ -91,7 +93,7 @@ type freq struct {
 	n  uint
 }
 
-// select most occuring artist from results taking canonical name into account
+// select most occurring artist from results taking canonical name into account
 func selectArtist(artist string, hits []gHit) (sel Artist) {
 
 	// calculate frequency of artists in hit list
@@ -189,7 +191,7 @@ func SongsOf(artist string) (ar Artist, sl []Song, err error) {
 		return
 	}
 
-	// select most occuring artist from results taking canonical name into account
+	// select most occurring artist from results taking canonical name into account
 	ar = selectArtist(artist, result.Response.Hits)
 
 	if ar.Id == 0 && len(ar.Name) <= 0 {
