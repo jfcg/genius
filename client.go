@@ -222,7 +222,11 @@ func SongsOf(artist string) (ar Artist, sl []Song, err error) {
 	sl = result.Response.Songs
 
 	if result.Meta.Status != 200 {
-		err = errors.New("genius: " + result.Meta.Message)
+		msg := result.Meta.Message
+		if len(msg) <= 0 {
+			msg = result.Error_description
+		}
+		err = errors.New("genius: " + msg)
 	}
 	return
 }
