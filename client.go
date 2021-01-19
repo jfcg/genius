@@ -195,7 +195,7 @@ func SongsOf(artist string) (ar Artist, sl []Song, err error) {
 	ar = selectArtist(artist, result.Response.Hits)
 
 	if ar.Id == 0 && len(ar.Name) <= 0 {
-		err = errors.New("genius: no such artist found")
+		err = errors.New("genius: artist not found or ambiguous")
 		return
 	}
 
